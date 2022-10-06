@@ -1,25 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:poc_valuenotifier/controllers/login_controller.dart';
+import 'package:poc_valuenotifier/ui/pages/home/home_page.dart';
 import 'package:poc_valuenotifier/ui/themes/app_button_theme.dart';
 
 import 'nickname_formatter.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   static const route = '/login';
 
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> implements ILoginView {
   final nicknameKey = GlobalKey<FormFieldState>();
+
   late final LoginController controller;
 
-  LoginPage({super.key});
+  @override
+  void initState() {
+    controller = LoginController(this, GetIt.I.get());
+    super.initState();
+  }
+
+  @override
+  void navigateToHome() {
+    Navigator.of(context).pushNamed(HomePage.route);
+  }
 
   @override
   Widget build(BuildContext context) {
-    controller = GetIt.I.get();
-    controller.navigatToHome = () {
-      Navigator.of(context).pushNamed('/home');
-    };
-
     return Scaffold(
       appBar: AppBar(title: const Text('Log in')),
       body: ValueListenableBuilder(
@@ -50,6 +63,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 48,
+                  // Exemplo de botão com estilo herdado do tema da applicação
                   child: TextButton(
                     onPressed: () {
                       if (!(nicknameKey.currentState?.validate() ?? false)) {
@@ -62,6 +76,7 @@ class LoginPage extends StatelessWidget {
                     child: const Text('Entrar'),
                   ),
                 ),
+                // Exemplo de botão com estilo usando o "style"
                 TextButton(
                   style: ButtonType.secondary.toStyle(context),
                   onPressed: () {},

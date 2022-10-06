@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:poc_valuenotifier/repositories/auth_repository.dart';
 
+abstract class ILoginView {
+  void navigateToHome();
+}
+
 class LoginController {
   final IAuthRepository _repository;
+  final ILoginView _view;
 
-  LoginController(this._repository);
+  LoginController(this._view, this._repository);
 
   final ValueNotifier<bool> loading = ValueNotifier(false);
   final ValueNotifier<String> nickname = ValueNotifier('');
@@ -26,7 +31,7 @@ class LoginController {
   Future<void> logIn() async {
     loading.value = true;
     await _repository.logIn('monstro-do-whey@maromba.com', 'vitaminas123');
-    navigatToHome?.call();
+    _view.navigateToHome();
     loading.value = false;
   }
 }
