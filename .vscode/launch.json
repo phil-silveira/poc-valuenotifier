@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define=ENV_NAME=DEV",
+            ]
+        },
+        {
+            "name": "Homolog",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define=ENV_NAME=QA",
+            ]
+        },
+        {
+            "name": "Production",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define=ENV_NAME=PROD",
+            ]
+        },
+    ]
+}
