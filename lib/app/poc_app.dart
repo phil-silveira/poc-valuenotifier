@@ -14,7 +14,7 @@ class PocApp extends StatelessWidget {
       initialRoute: LoginPage.route,
       routes: {
         HomePage.route: (context) => const HomePage(),
-        LoginPage.route: (context) => LoginPage(),
+        LoginPage.route: (context) => const LoginPage(),
       },
     );
   }
